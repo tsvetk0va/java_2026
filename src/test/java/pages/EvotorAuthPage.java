@@ -12,25 +12,38 @@ public class EvotorAuthPage {
     private final SelenideElement passwordInputField = $(".evo-input__field[type='password']");
     private final SelenideElement submitButton = $("button[type='submit']");
 
+    public EvotorAuthPage phoneInputFieldShouldBeVisible() {
+        phoneInputField.shouldBe(visible);
+        return this;
+    }
+
+    public EvotorAuthPage passwordInputFieldShouldBeVisible() {
+        passwordInputField.shouldBe(visible);
+        return this;
+    }
+
+    public EvotorAuthPage submitButtonShouldBeClickable() {
+        submitButton.shouldBe(visible, enabled);
+        return this;
+    }
+
     public EvotorAuthPage selectPhonePasswordLoginMethod() {
         loginWithPhoneButton.click();
         return this;
     }
 
-    public EvotorAuthPage inputPhone(String phoneNumber) {
-        phoneInputField.shouldBe(visible).setValue(phoneNumber);
+    public EvotorAuthPage enterPhone(String phoneNumber) {
+        phoneInputField.setValue(phoneNumber);
         return this;
     }
 
-    public EvotorAuthPage inputPassword(String password) {
-        passwordInputField.shouldBe(visible).setValue(password).pressTab();
+    public EvotorAuthPage enterPassword(String password) {
+        passwordInputField.setValue(password).pressTab();
         return this;
     }
 
     public EvotorDashboardPage clickSubmitButton() {
-        submitButton.shouldBe(visible, enabled).click();
+        submitButton.click();
         return new EvotorDashboardPage();
     }
-
-
 }
