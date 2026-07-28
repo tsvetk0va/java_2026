@@ -16,6 +16,7 @@ public class MentoringCostPage {
     public PaymentPage clickProccedToCheckoutButton() {
         proccedToCheckoutButton.click();
         switchTo().window(2);
+
         return new PaymentPage();
     }
 }

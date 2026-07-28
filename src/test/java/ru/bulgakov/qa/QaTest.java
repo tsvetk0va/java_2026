@@ -6,15 +6,28 @@ import org.junit.jupiter.api.Test;
 import pages.EvotorStartPage;
 import pages.YandexSearchPage;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 import static com.codeborne.selenide.Selenide.open;
 
 public class QaTest {
 
+    static String prop(String key) {
+        try (InputStream in = QaTest.class.getResourceAsStream("/credentials.properties")) {
+            Properties props = new Properties();
+            props.load(in);
+            return props.getProperty(key);
+        } catch (Exception e) {
+            throw new RuntimeException("Не удалось прочитать ключ: " + key, e);
+        }
+    }
+
     private static final String YANDEX_URL = "https://ya.ru/";
     private static final String EVOTOR_URL = "https://market.evotor.ru/";
 
-    private static final String EVOTOR_PHONE = "71000001315";
-    private static final String EVOTOR_PASSWORD = "123456aA";
+    private static final String EVOTOR_PHONE = prop("evotor.phone");
+    private static final String EVOTOR_PASSWORD = prop("evotor.password");
 
     private static final String CHOOSE_TARIFF_BUTTON_TEXT = "Выбрать тариф";
     private static final String BASE_SUB_PAGE_TITLE = "Тарифы";
