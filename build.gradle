@@ -19,4 +19,21 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
+
+task positiveTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'positive'
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+task negativeTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'negative'
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
 }

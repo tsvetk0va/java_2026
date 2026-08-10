@@ -2,7 +2,10 @@ package webshop.test;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import webshop.TestBase;
 import webshop.pages.WSRegistrationPage;
 import webshop.pages.WSWelcomePage;
 
@@ -10,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static webshop.config.Config.WEBSHOP_REGISTRATION_URL;
 import static webshop.config.Config.WEBSHOP_URL;
 
-public class LoginTest {
+public class LoginTest extends TestBase {
     private static final Faker faker = new Faker();
     private String password;
     private String email;
@@ -33,6 +36,8 @@ public class LoginTest {
     }
 
     @Test
+    @DisplayName("Успешная авторизация")
+    @Tag("positive")
     void succesLoginTest() {
         open(WEBSHOP_URL, WSWelcomePage.class)
                 .openLogin()
