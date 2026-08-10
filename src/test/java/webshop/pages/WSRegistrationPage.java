@@ -18,6 +18,7 @@ public class WSRegistrationPage {
     private final SelenideElement submitRegistrationButton = $("input#register-button");
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection userEmailInHeader = $$("div.header-links ul li");
+    private final SelenideElement emailErrorMessage = $("span[for='Email']");
 
     public WSRegistrationPage register(String firstName, String lastName, String email, String password) {
         selectFemaleGender()
@@ -78,6 +79,17 @@ public class WSRegistrationPage {
 
     public WSRegistrationPage checkUserLoggedIn(String email) {
         userEmailInHeader.get(0).shouldHave(exactText(email));
+        return this;
+    }
+
+    public WSRegistrationPage checkEmailValidationError() {
+        emailErrorMessage.shouldHave(exactText("Wrong email"));
+        return this;
+    }
+
+
+    public WSRegistrationPage checkEmailRequiredError() {
+        emailErrorMessage.shouldHave(exactText("Email is required."));
         return this;
     }
 
