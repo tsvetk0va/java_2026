@@ -1,5 +1,6 @@
 package webshop.test;
 
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -7,20 +8,28 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import webshop.TestBase;
 import webshop.pages.WSWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static webshop.config.Config.WEBSHOP_URL;
 
 public class RegistrationTest extends TestBase {
     private static final Faker faker = new Faker();
 
     @Test
-    @DisplayName("Успешная регистрация")
+    @Owner("k.tsvetkova")
+    @DisplayName("Успешная регистрация нового пользователя")
     @Tag("positive")
+    @Severity(CRITICAL)
+    @Epic("Регистрация")
+    @Feature("Регистрация нового пользователя")
+    @Story("Позитивные")
+    @Link("Task-120")
+    @Issue("BUG-19")
+    @Description("Создаем нового пользователя со случайными данными через интерфейс")
     void registrationTest() {
         String password = faker.credentials().password();
         String email = faker.internet().emailAddress();
@@ -30,7 +39,7 @@ public class RegistrationTest extends TestBase {
                 .verifyRegistrationOpened()
                 .selectFemaleGender()
                 .enterFirstName(faker.name().firstName())
-                .enterLasttName(faker.name().lastName())
+                .enterLastName(faker.name().lastName())
                 .enterEmail(email)
                 .enterPassword(password)
                 .enterConfirmPassword(password)
@@ -39,9 +48,12 @@ public class RegistrationTest extends TestBase {
                 .checkUserLoggedIn(email);
     }
 
-    @ParameterizedTest
-    @DisplayName("Регистрация с невалидным email")
+    @ParameterizedTest(name = "Регистрация с невалидным email: {0}")
+    @Owner("k.tsvetkova")
     @Tag("negative")
+    @Epic("Регистрация")
+    @Feature("Регистрация нового пользователя")
+    @Story("Негативные")
     @CsvFileSource(resources = "/email.csv")
     void registrationWithInvalidEmailTest(String email) {
         String password = faker.credentials().password();
@@ -51,7 +63,7 @@ public class RegistrationTest extends TestBase {
                 .verifyRegistrationOpened()
                 .selectFemaleGender()
                 .enterFirstName(faker.name().firstName())
-                .enterLasttName(faker.name().lastName())
+                .enterLastName(faker.name().lastName())
                 .enterEmail(email)
                 .enterPassword(password)
                 .enterConfirmPassword(password)
@@ -60,10 +72,14 @@ public class RegistrationTest extends TestBase {
     }
 
     @ParameterizedTest
+    @Owner("k.tsvetkova")
     @DisplayName("Регистрация с пустым email")
     @NullAndEmptySource
-    @ValueSource(strings={" ", "  "})
+    @ValueSource(strings = {" ", "  "})
     @Tag("negative")
+    @Epic("Регистрация")
+    @Feature("Регистрация нового пользователя")
+    @Story("Негативные")
     void registrationWithEmptyEmailTest(String email) {
         String password = faker.credentials().password();
 
@@ -72,7 +88,7 @@ public class RegistrationTest extends TestBase {
                 .verifyRegistrationOpened()
                 .selectFemaleGender()
                 .enterFirstName(faker.name().firstName())
-                .enterLasttName(faker.name().lastName())
+                .enterLastName(faker.name().lastName())
                 .enterEmail(email)
                 .enterPassword(password)
                 .enterConfirmPassword(password)

@@ -1,6 +1,10 @@
 package webshop.test;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -16,6 +20,7 @@ import webshop.steps.AuthSteps;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static webshop.config.Config.WEBSHOP_URL;
 
@@ -30,9 +35,13 @@ public class CartTest extends TestBase {
 
 
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Добавление товара в корзину с выбором процессора: {0}")
+    @Epic("Корзина")
+    @Owner("k.tsvetkova")
+    @Tag("positive")
+    @Severity(CRITICAL)
+    @Link("TEST-1515")
     @ValueSource(ints = {0, 1, 2})
-    @DisplayName("Добавление товара в корзину")
     @Tag("positive")
     void addItemToCartTest(int processorIndex) {
         String quantity = "3";

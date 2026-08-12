@@ -1,6 +1,7 @@
 package webshop.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.text;
@@ -21,16 +22,19 @@ public class WSCartPage {
         this.expectedSubtotal = expectedSubtotal;
     }
 
+    @Step("Проверить название товара в корзине")
     public WSCartPage checkProductName(){
         productName.shouldHave(text(expectedName));
         return this;
     }
 
+    @Step("Проверить количество товара в корзине")
     public WSCartPage checkQuantity(){
         quantityInput.shouldHave(exactValue(String.valueOf(expectedQuantity)));
         return this;
     }
 
+    @Step("Проверить итоговую стоимость товара в корзине")
     public WSCartPage checkSubtotal(){
         productSubtotal.shouldHave(text(String.valueOf(expectedSubtotal)));
         return this;

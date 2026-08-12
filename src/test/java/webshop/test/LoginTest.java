@@ -1,5 +1,9 @@
 package webshop.test;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +14,7 @@ import webshop.pages.WSRegistrationPage;
 import webshop.pages.WSWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static webshop.config.Config.WEBSHOP_REGISTRATION_URL;
 import static webshop.config.Config.WEBSHOP_URL;
 
@@ -36,9 +41,13 @@ public class LoginTest extends TestBase {
     }
 
     @Test
+    @Owner("k.tsvetkova")
+    @Epic("Авторизация")
+    @Link("TASK-2333")
     @DisplayName("Успешная авторизация")
+    @Severity(CRITICAL)
     @Tag("positive")
-    void succesLoginTest() {
+    void successLoginTest() {
         open(WEBSHOP_URL, WSWelcomePage.class)
                 .openLogin()
                 .checkLoginPageOpened()
