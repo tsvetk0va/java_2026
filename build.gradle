@@ -1,13 +1,30 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version "4.1.0"
 }
+def allureVersion = "2.34.0"
 
+allure {
+    report {
+        version.set(allureVersion)
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
+        }
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    testImplementation "io.qameta.allure:allure-junit5:$allureVersion"
+    testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
 // Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
     // Source: https://mvnrepository.com/artifact/com.codeborne/selenide
@@ -15,8 +32,26 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // Source: https://mvnrepository.com/artifact/net.datafaker/datafaker
     testImplementation 'net.datafaker:datafaker:2.5.3'
+    implementation 'org.aeonbits.owner:owner:1.0.12'
 }
 
 test {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
+}
+
+task positiveTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'positive'
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+task negativeTest(type: Test) {
+    useJUnitPlatform {
+        includeTags 'negative'
+    }
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
 }
