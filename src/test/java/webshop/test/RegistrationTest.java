@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-import webshop.TestBase;
+import webshop.util.TestBase;
 import webshop.pages.WSWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;

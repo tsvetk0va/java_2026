@@ -8,9 +8,12 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
+import static com.codeborne.selenide.Selenide.sessionId;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class AttachManager {
@@ -46,4 +49,23 @@ public class AttachManager {
             return "Не удалось получить логи: " + e.getMessage();
         }
     }
+
+    @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
+    public static String addVideo() {
+        return "<html><body><video width='100%' height='100%' autoplay><source src='"
+                + getVideoUrl() + "' type='video/mp4'></video></body></html>";
+    }
+
+    private static URL getVideoUrl() {
+        String videoUrl = "https://selenoid.qa.guru/video/" + sessionId() + ".mp4";
+
+        try {
+            return new URL(videoUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 }

@@ -13,7 +13,6 @@ public class WSWelcomePage {
     private final SelenideElement registerButton = $("a.ico-register");
     private final SelenideElement loginLink = $("a.ico-login");
     private final ElementsCollection headerLinks = $$("div.header-links ul li");
-    private final ElementsCollection userEmailInHeader = $$("div.header-links ul li");
     private final ElementsCollection topMenuItems = $$("ul.top-menu li a");
     private final SelenideElement desktopsLink = $(byText("Desktops"));
 
@@ -31,7 +30,7 @@ public class WSWelcomePage {
 
     @Step("Проверить что пользователь залогинен с {email}")
     public WSWelcomePage checkUserLoggedIn(String email) {
-        userEmailInHeader.get(0).shouldHave(exactText(email));
+        headerLinks.get(0).shouldHave(exactText(email));
         return this;
     }
 

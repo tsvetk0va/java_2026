@@ -7,11 +7,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class WSDesktopsPage {
 
-    private final ElementsCollection products = $$("div.product-grid div");
+    private final ElementsCollection productLinks = $$("h2.product-title a");
 
     @Step("Выбрать из каталога первый товар")
     public WSProductPage selectProduct() {
-        products.get(0).click();
+        productLinks.get(0).click();
         return new WSProductPage();
     }
 }
