@@ -3,6 +3,7 @@ package webshop.test;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import webshop.pages.Processor;
@@ -36,7 +37,7 @@ public class CartTest extends TestBase {
     @Severity(CRITICAL)
     @Link("TEST-1515")
     @EnumSource(Processor.class)
-//    @Tag("positive")
+    @Tags({@Tag("UI"), @Tag("positive")})
     void addItemToCartTest(Processor processor) {
         String property = System.getProperty("run", "local");
         String quantity = "3";

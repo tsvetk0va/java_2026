@@ -5,10 +5,7 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import webshop.util.TestBase;
 import webshop.pages.WSRegistrationPage;
 import webshop.pages.WSWelcomePage;
@@ -46,7 +43,7 @@ public class LoginTest extends TestBase {
     @Link("TASK-2333")
     @DisplayName("Успешная авторизация")
     @Severity(CRITICAL)
-//    @Tag("positive")
+    @Tags({@Tag("UI"), @Tag("positive")})
     void successLoginTest() {
         open(WEBSHOP_URL, WSWelcomePage.class)
                 .openLogin()
