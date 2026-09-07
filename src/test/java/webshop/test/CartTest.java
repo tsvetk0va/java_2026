@@ -36,7 +36,7 @@ public class CartTest extends TestBase {
     @Severity(CRITICAL)
     @Link("TEST-1515")
     @EnumSource(Processor.class)
-    @Tag("positive")
+//    @Tag("positive")
     void addItemToCartTest(Processor processor) {
         String property = System.getProperty("run", "local");
         String quantity = "3";

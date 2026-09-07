@@ -40,18 +40,37 @@ test {
     systemProperties(System.getProperties())
 }
 
-task positiveTest(type: Test) {
-    useJUnitPlatform {
-        includeTags 'positive'
-    }
+task uiTest(type: Test) {
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
+
+    useJUnitPlatform {
+        def tag = System.getProperty("tag")
+/*  если тэг указан -- запускаем UI тесты + тэг тест
+    если нет -- только UI
+ */
+        if (tag != null && !tag.isBlank()) {
+            includeTags("UI & ${tag}")
+        } else {
+            includeTags("UI")
+        }
+    }
+    systemProperties(System.getProperties())
 }
 
-task negativeTest(type: Test) {
-    useJUnitPlatform {
-        includeTags 'negative'
-    }
+task apiTest(type: Test) {
     testClassesDirs = sourceSets.test.output.classesDirs
     classpath = sourceSets.test.runtimeClasspath
+
+    useJUnitPlatform {
+        def tag = System.getProperty("tag")
+/*  если тэг указан -- запускаем API тесты + тэг тест
+    если нет -- только*/
+        if (tag != null && !tag.isBlank()) {
+            includeTags("API & ${tag}")
+        } else {
+            includeTags("API")
+        }
+    }
+    systemProperties(System.getProperties())
 }

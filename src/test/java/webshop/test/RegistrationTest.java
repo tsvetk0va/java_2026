@@ -22,7 +22,7 @@ public class RegistrationTest extends TestBase {
     @Test
     @Owner("k.tsvetkova")
     @DisplayName("Успешная регистрация нового пользователя")
-    @Tag("positive")
+//    @Tag("positive")
     @Severity(CRITICAL)
     @Epic("Регистрация")
     @Feature("Регистрация нового пользователя")
@@ -50,7 +50,7 @@ public class RegistrationTest extends TestBase {
 
     @ParameterizedTest(name = "Регистрация с невалидным email: {0}")
     @Owner("k.tsvetkova")
-    @Tag("negative")
+//    @Tag("negative")
     @Epic("Регистрация")
     @Feature("Регистрация нового пользователя")
     @Story("Негативные")
@@ -76,7 +76,7 @@ public class RegistrationTest extends TestBase {
     @DisplayName("Регистрация с пустым email")
     @NullAndEmptySource
     @ValueSource(strings = {" ", "  "})
-    @Tag("negative")
+//    @Tag("negative")
     @Epic("Регистрация")
     @Feature("Регистрация нового пользователя")
     @Story("Негативные")

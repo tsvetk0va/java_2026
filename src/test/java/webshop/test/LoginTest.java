@@ -46,7 +46,7 @@ public class LoginTest extends TestBase {
     @Link("TASK-2333")
     @DisplayName("Успешная авторизация")
     @Severity(CRITICAL)
-    @Tag("positive")
+//    @Tag("positive")
     void successLoginTest() {
         open(WEBSHOP_URL, WSWelcomePage.class)
                 .openLogin()
