@@ -24,8 +24,7 @@ public class TestBase {
         Configuration.browser = config.browser();
 
         if ("remote".equals(System.getProperty("run"))) {
-            Configuration.remote =
-                    "https://" + config.selenoidUser() + ":" + config.selenoidPassword() + "@" + config.selenoidUrl();
+            Configuration.remote = config.selenoidUrl();
             Configuration.browserCapabilities = getSelenoidChromeOptions();
         }
     }
