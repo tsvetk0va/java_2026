@@ -57,7 +57,7 @@ public class AttachManager {
     }
 
     private static URL getVideoUrl() {
-        String videoUrl = "https://selenoid.qa.guru/video/" + sessionId() + ".mp4";
+        String videoUrl = "https://selenoid.ya-telemost.site:8443/video/" + sessionId() + ".mp4";
 
         try {
             return new URL(videoUrl);
