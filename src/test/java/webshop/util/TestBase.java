@@ -39,7 +39,9 @@ public class TestBase {
         AttachManager.getBrowserConsoleLogs();
 
         if ("remote".equals(config.run())) {
-            AttachManager.addVideo();
+            String id = sessionId().toString();   // запомнили id, пока драйвер жив
+            closeWebDriver();                      // закрыли сессию — Selenoid допишет видео
+            AttachManager.addVideo(id);            // теперь качаем
         }
     }
 
