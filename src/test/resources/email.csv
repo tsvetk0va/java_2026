@@ -1,0 +1,12 @@
+plainaddress,
+@no-local-part.com,
+no-at-sign.com,
+missing-domain@,
+missing-tld@example,
+two@@signs.com,
+spaces in@email.com,
+trailing-dot@example.com.,
+.leading-dot@example.com,
+double..dot@example.com,
+email@-example.com,
+email@example..com

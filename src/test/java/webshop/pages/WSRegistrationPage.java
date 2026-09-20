@@ -2,6 +2,7 @@ package webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,11 +19,12 @@ public class WSRegistrationPage {
     private final SelenideElement submitRegistrationButton = $("input#register-button");
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection userEmailInHeader = $$("div.header-links ul li");
+    private final SelenideElement emailErrorMessage = $("span[for='Email']");
 
     public WSRegistrationPage register(String firstName, String lastName, String email, String password) {
         selectFemaleGender()
                 .enterFirstName(firstName)
-                .enterLasttName(lastName)
+                .enterLastName(lastName)
                 .enterEmail(email)
                 .enterPassword(password)
                 .enterConfirmPassword(password)
@@ -31,53 +33,76 @@ public class WSRegistrationPage {
         return this;
     }
 
+    @Step("Проверка что открылась страница регистрации")
     public WSRegistrationPage verifyRegistrationOpened() {
         pageTitle.shouldHave(exactText("Register"));
         return this;
     }
 
+    @Step("Выбрать пол")
     public WSRegistrationPage selectFemaleGender() {
         femaleGenderRadio.click();
         return this;
     }
 
+    @Step("Ввести имя")
     public WSRegistrationPage enterFirstName(String firstName) {
         firstNameInput.setValue(firstName);
         return this;
     }
 
-    public WSRegistrationPage enterLasttName(String lastName) {
+    @Step("Ввести фамилию '{lastName}'")
+    public WSRegistrationPage enterLastName(String lastName) {
         lastNameInput.setValue(lastName);
         return this;
     }
 
+    @Step("Ввести электронную почту '{email}'")
     public WSRegistrationPage enterEmail(String email) {
         emailInput.setValue(email);
         return this;
     }
 
+    @Step("Ввести пароль '{password}'")
     public WSRegistrationPage enterPassword(String password) {
         passwordInput.setValue(password);
         return this;
     }
 
+    @Step("Ввести подтверждение пароля '{password}'")
     public WSRegistrationPage enterConfirmPassword(String password) {
         passwordConfirmInput.setValue(password);
         return this;
     }
 
+    @Step("Подтвердить регистрацию")
     public WSRegistrationPage submitRegistration() {
         submitRegistrationButton.click();
         return this;
     }
 
+    @Step("Проверить что появилось сообщение о завершении регистрации")
     public WSRegistrationPage checkRegistrationCompleted() {
         resultText.shouldHave(exactText("Your registration completed"));
         return this;
     }
 
+    @Step("Проверка что пользователь залогинен c электронной почтой '{email}'")
     public WSRegistrationPage checkUserLoggedIn(String email) {
         userEmailInHeader.get(0).shouldHave(exactText(email));
+        return this;
+    }
+
+    @Step("Проверка, что появилось сообщение с ошибкой валидации почты")
+    public WSRegistrationPage checkEmailValidationError() {
+        emailErrorMessage.shouldHave(exactText("Wrong email"));
+        return this;
+    }
+
+
+    @Step("Проверка, что появилось сообщение с ошибкой о том, что ввод электронной почты обязателен")
+    public WSRegistrationPage checkEmailRequiredError() {
+        emailErrorMessage.shouldHave(exactText("Email is required."));
         return this;
     }
 
